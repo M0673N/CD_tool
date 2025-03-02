@@ -1,26 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Users</title>
+    <link rel="stylesheet" href="static/style.css">
 </head>
+
 <body>
-    <h2>Add User</h2>
-    <form action="/add_user" method="post">
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" required><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required><br>
-        <label for="master_password">Master Password:</label><br>
-        <input type="password" id="master_password" name="master_password" required><br><br>
-        <input type="submit" value="Add User">
-    </form>
-    <h2>Delete User</h2>
-    <form action="/delete_user" method="post">
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" required><br>
-        <label for="master_password">Master Password:</label><br>
-        <input type="password" id="master_password" name="master_password" required><br><br>
-        <input type="submit" value="Delete User">
-    </form>
+    <div class="container">
+        <h2>Manage Users</h2>
+        <div class="forms-container">
+            <form action="/add_user" method="post" class="form">
+                <h3>Add User</h3>
+                <div class="form-group">
+                    <label for="add-username">Username:</label>
+                    <input type="text" id="add-username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="add-password">Password:</label>
+                    <input type="password" id="add-password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="add-master_password">Master Password:</label>
+                    <input type="password" id="add-master_password" name="master_password" required>
+                </div>
+                <input type="submit" value="Add User">
+            </form>
+            <form action="/delete_user" method="post" class="form">
+                <h3>Delete User</h3>
+                <div class="form-group">
+                    <label for="delete-username">Username:</label>
+                    <input type="text" id="delete-username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="delete-master_password">Master Password:</label>
+                    <input type="password" id="delete-master_password" name="master_password" required>
+                </div>
+                <input type="submit" value="Delete User">
+            </form>
+        </div>
+    </div>
 </body>
+
 </html>
