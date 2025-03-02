@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse
 from database import get_session
 from security import check_password, MASTER_PASSWORD_HASH, hash_password
 from models import User
-from utils import execute_command
+from utils import execute_command, schedule_command, check_credentials, schedule_command_endpoint
 
 
 router = APIRouter()
@@ -79,3 +79,8 @@ async def delete_user(username: str = Form(...), master_password: str = Form(...
         )
     finally:
         session.close()
+
+
+@router.post("/1am")
+async def schedule_command_at_1am(request: Request):
+    return await schedule_command_endpoint(request, "CD")
