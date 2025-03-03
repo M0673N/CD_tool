@@ -35,6 +35,17 @@ h2 {
     text-align: center;
 }
 
+.success-message {
+    display: none;
+    margin: 20px 10px 0px 10px;
+    padding: 10px;
+    border: 1px solid #8bc34a;
+    background-color: #dff0d8;
+    color: #3e8e41;
+    border-radius: 5px;
+    text-align: center;
+}
+
 .form {
     width: 45%;
     padding: 20px;

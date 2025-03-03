@@ -31,10 +31,15 @@ def check_credentials(username, password):
         return False
 
 
-async def execute_command(command_name: str, request: Request):
+async def extract_credentials(request: Request):
     data = await request.json()
     username = data.get("username")
     password = data.get("password")
+    return username, password
+
+
+async def execute_command(command_name: str, request: Request):
+    username, password = await extract_credentials(request)
 
     if check_credentials(username, password):
         run_command(command_name)
@@ -69,9 +74,7 @@ def run_command_at_1am(job_name):
 
 
 async def schedule_command_endpoint(request: Request, command: str):
-    data = await request.json()
-    username = data.get("username")
-    password = data.get("password")
+    username, password = await extract_credentials(request)
 
     if check_credentials(username, password):
         if schedule_command(command):
