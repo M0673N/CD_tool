@@ -1,6 +1,7 @@
+import os
 from argon2 import PasswordHasher
 from dotenv import load_dotenv
-import os
+from fastapi import HTTPException
 
 load_dotenv()
 
@@ -17,4 +18,4 @@ def check_password(password, hashed_password):
     try:
         return ph.verify(hashed_password, password)
     except:
-        return False
+        raise HTTPException(status_code=401, detail="Invalid credentials")
