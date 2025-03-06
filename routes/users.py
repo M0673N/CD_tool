@@ -5,7 +5,7 @@ from database import db_dependency
 from security import check_password, MASTER_PASSWORD_HASH, hash_password
 from models import User
 from starlette import status
-from validators import add_user_request, delete_user_request
+from validators import add_user_dependency, delete_user_dependency
 
 router = APIRouter(prefix="/users", tags=["users"])
 
@@ -18,7 +18,7 @@ def manage_users(request: Request):
 
 
 @router.post("/add", status_code=status.HTTP_201_CREATED)
-async def add_user(db: db_dependency, add_user_request: add_user_request):
+async def add_user(db: db_dependency, add_user_request: add_user_dependency):
     check_password(add_user_request.master_password, MASTER_PASSWORD_HASH)
     existing_user = db.query(User).filter_by(username=add_user_request.username).first()
     if existing_user:
@@ -31,7 +31,7 @@ async def add_user(db: db_dependency, add_user_request: add_user_request):
 
 
 @router.delete("/delete", status_code=status.HTTP_200_OK)
-async def delete_user(db: db_dependency, delete_user_request: delete_user_request):
+async def delete_user(db: db_dependency, delete_user_request: delete_user_dependency):
     check_password(delete_user_request.master_password, MASTER_PASSWORD_HASH)
     user = db.query(User).filter_by(username=delete_user_request.username).first()
     if user:

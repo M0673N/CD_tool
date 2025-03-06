@@ -65,5 +65,5 @@ class ScheduleCommandRequest(BaseModel):
     }
 
 
-delete_user_request = Annotated[DeleteUserRequest, Form()]
-add_user_request = Annotated[AddUserRequest, Form()]
+delete_user_dependency = Annotated[DeleteUserRequest, Form()]
+add_user_dependency = Annotated[AddUserRequest, Form()]
