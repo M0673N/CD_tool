@@ -22,22 +22,20 @@ scheduler.start()
 
 @router.post("/", status_code=status.HTTP_200_OK)
 async def webhook(db: db_dependency, execute_command_request: ExecuteCommandRequest):
-    return execute_command("CD", execute_command_request, db)
+    return execute_command(execute_command_request, db)
 
 
 @router.post("/schedule", status_code=status.HTTP_200_OK)
 async def schedule_command_at_1am(
     db: db_dependency, schedule_command_request: ScheduleCommandRequest
 ):
-    return schedule_command_endpoint("CD", schedule_command_request, db)
+    return schedule_command_endpoint(schedule_command_request, db)
 
 
 def run_command(cmd):
     command = os.getenv(cmd)
     if command is None:
-        raise HTTPException(
-            status_code=400, detail=f"This command is not accepted: {cmd}"
-        )
+        raise HTTPException(status_code=400, detail="This command is not allowed")
     subprocess.run(command, shell=True, check=True)
 
 
@@ -48,11 +46,11 @@ def check_credentials(username, password, db):
     raise HTTPException(status_code=401, detail="Invalid credentials")
 
 
-def execute_command(command_name: str, execute_command_request, db):
+def execute_command(execute_command_request, db):
     check_credentials(
         execute_command_request.username, execute_command_request.password, db
     )
-    run_command(command_name)
+    run_command(execute_command_request.command)
     return JSONResponse(
         content={"detail": "Command executed successfully"}, status_code=200
     )
@@ -102,10 +100,13 @@ def schedule_command(job_name, hour, minute, db):
     )
 
 
-def schedule_command_endpoint(command: str, schedule_command_request, db):
+def schedule_command_endpoint(schedule_command_request, db):
     check_credentials(
         schedule_command_request.username, schedule_command_request.password, db
     )
     return schedule_command(
-        command, schedule_command_request.hour, schedule_command_request.minute, db
+        schedule_command_request.command,
+        schedule_command_request.hour,
+        schedule_command_request.minute,
+        db,
     )

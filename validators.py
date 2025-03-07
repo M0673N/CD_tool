@@ -36,12 +36,14 @@ class AddUserRequest(BaseModel):
 class ExecuteCommandRequest(BaseModel):
     username: str = Field(min_length=1, max_length=50)
     password: str = Field(min_length=1, max_length=50)
+    command: str = Field(min_length=1, max_length=50)
 
     model_config = {
         "json_schema_extra": {
             "example": {
                 "username": "tool_user",
                 "password": "mypass1234",
+                "command": "CD",
             }
         }
     }
@@ -50,6 +52,7 @@ class ExecuteCommandRequest(BaseModel):
 class ScheduleCommandRequest(BaseModel):
     username: str = Field(min_length=1, max_length=50)
     password: str = Field(min_length=1, max_length=50)
+    command: str = Field(min_length=1, max_length=50)
     hour: int = Field(ge=0, le=23)
     minute: int = Field(ge=0, le=59)
 
@@ -58,6 +61,7 @@ class ScheduleCommandRequest(BaseModel):
             "example": {
                 "username": "tool_user",
                 "password": "mypass1234",
+                "command": "CD",
                 "hour": 23,
                 "minute": 45,
             }
