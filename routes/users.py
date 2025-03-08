@@ -1,10 +1,9 @@
-from fastapi import APIRouter, Request, HTTPException
+from fastapi import APIRouter, Request, HTTPException, status
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import JSONResponse
 from database import db_dependency
 from security import check_password, MASTER_PASSWORD_HASH, hash_password
 from models import User
-from starlette import status
 from validators import add_user_dependency, delete_user_dependency
 
 router = APIRouter(prefix="/users", tags=["users"])

@@ -1,8 +1,7 @@
 import os
 import subprocess
-from fastapi import APIRouter, Request, HTTPException
+from fastapi import APIRouter, Request, HTTPException, status
 from fastapi.responses import JSONResponse
-from starlette import status
 from dotenv import load_dotenv
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
