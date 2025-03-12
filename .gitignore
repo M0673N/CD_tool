@@ -173,3 +173,7 @@ cython_debug/
 
 # DB stuff
 *.db
+
+# Certificates
+cert.pem
+key.pem
