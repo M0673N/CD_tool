@@ -25,7 +25,7 @@ if __name__ == "__main__":
         "main:app",
         host="0.0.0.0",
         port=8000,
-        ssl_keyfile="./key.pem",
-        ssl_certfile="./cert.pem",
+        ssl_keyfile="ssl/server.key",
+        ssl_certfile="ssl/server.crt",
         workers=4,
     )

@@ -175,5 +175,4 @@ cython_debug/
 *.db
 
 # Certificates
-cert.pem
-key.pem
+ssl/*
